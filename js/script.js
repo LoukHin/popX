@@ -29,6 +29,11 @@ function fetchingNewValue(firstTime) {
     })
     .then((data) => {
       updateDisplayValue(data);
+      
+      if (data.isFinished) {
+        window.location.replace("/grandopening");
+      }
+
       fetchingNewValue(false);
     });
 }

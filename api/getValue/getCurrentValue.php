@@ -2,6 +2,8 @@
 
 require './../conn.php';
 
+$MAX_GRAND_OPENING = 100000;
+
 // set php runtime to unlimited
 set_time_limit(0);
 
@@ -21,6 +23,7 @@ while (true) {
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();
         unset($row["popcat"]);
+        $row["isFinished"] = ($row["nuea"] + $row["klang"] + $row["esan"] + $row["tai"]) >= $MAX_GRAND_OPENING;
         // encode to JSON, render the result (for AJAX)
         $json = json_encode($row);
         echo $json;
