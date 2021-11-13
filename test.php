@@ -226,7 +226,7 @@ session_start();
         var MyScore = 0;
         var score;
 
-        const ASSET_PATH = "./src/assets/image";
+        const ASSET_PATH = "./assets/image";
         // mouseclick event
         document.body.addEventListener("mousedown", function() {
             increaseScore();
@@ -287,7 +287,7 @@ session_start();
             const sb = document.querySelector("#majar");
             const Index = sb.selectedIndex;
 
-            fetch(`/src/api/updateValue/UPDATE_ID_${Index}.php`)
+            fetch(`/api/updateValue/UPDATE_ID_${Index}.php`)
                 .then((res) => {
                     return res.json();
                 })
@@ -298,7 +298,7 @@ session_start();
 
         const fetchingNewValue = () => {
             const time = new Date().getTime();
-            fetch(`/src/api/getValue/getCurrentValue.php?t=${Math.floor(time / 1000)}`)
+            fetch(`/api/getValue/getCurrentValue.php?t=${Math.floor(time / 1000)}`)
                 .then((res) => {
                     return res.json();
                 })
