@@ -15,7 +15,7 @@ function getCookie(name) {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);
   if (parts.length === 2) return parts.pop().split(";").shift();
-  return 0
+  return 0;
 }
 
 function fetchingNewValue(firstTime) {
@@ -32,7 +32,7 @@ function fetchingNewValue(firstTime) {
       updateDisplayValue(data);
 
       if (data.isFinished) {
-        window.location.replace("/grandopening");
+        window.location.replace("/grandopening.php");
       }
 
       fetchingNewValue(false);
@@ -185,7 +185,7 @@ document.body.addEventListener("touchmove", function () {
 });
 
 const init = () => {
-  count.innerText = score;
+  if (score > 0) count.innerText = score;
   fetchingNewValue(true);
 };
 

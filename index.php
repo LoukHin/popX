@@ -60,7 +60,7 @@ session_start();
   </head>
 
   <body class="h-screen relative flex items-center flex-col">
-    <div class="container mx-auto px-5 mb-24 space-y-1 flex justify-center items-center flex-col">
+    <div class="container mx-auto px-5 mb-12 space-y-1 flex justify-center items-center flex-col">
       <!-- <div class="text-7xl p-10">popX</div> -->
       <div id="container">
         <span id="text1"></span>
@@ -79,26 +79,28 @@ session_start();
           </filter>
         </defs>
       </svg>
-      <p id="score">0</p>
     </div>
-    <div class="absolute w-36 h-52 p-6 mx-auto right-28 top-10 space-y-5 bg-gray-100 rounded-lg shadow-lg" id="scoreboard">
+    <p id="score" class="text-8xl my-4">0</p>
+    <div class="mb-12" id="cat">
+      <img class="cursor-pointer" src="assets/icon/cat0.svg" alt="cat" id="imgClickAndChange">
+    </div>
+    <div class="block md:absolute w-3/4 md:w-36 h-52 p-6 mb-12 mx-auto sm:right-0 lg:right-28 sm:top-48 lg:top-10 space-y-5 bg-gray-100 rounded-lg shadow-lg" id="scoreboard">
       <h2>เหนือ : <a id="demo_1">0</a></h2>
       <h2>กลาง : <a id="demo_2">0</a></h2>
       <h2>อีสาน : <a id="demo_3">0</a></h2>
       <h2>ใต้ : <a id="demo_4">0</a></h2>
     </div>
-    <div class="mb-24" id="cat">
-      <img class="cursor-pointer" src="assets/icon/cat0.svg" alt="cat" id="imgClickAndChange">
+    <div class="pb-12">
+      <label class="block text-left appearance-none outline-none text-gray-800" style="max-width: 400px">
+        <span class="text-gray-700">มาจากภาคไหนเอ่ย ( แบ่งแบบสี่ภูมิภาค ref : <a target="_" class="text-blue-500" href="https://th.wikipedia.org/wiki/%E0%B8%A0%E0%B8%B9%E0%B8%A1%E0%B8%B4%E0%B8%A0%E0%B8%B2%E0%B8%84%E0%B8%82%E0%B8%AD%E0%B8%87%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B9%80%E0%B8%97%E0%B8%A8%E0%B9%84%E0%B8%97%E0%B8%A2">Click</a> )</span>
+        <select class="form-select block w-full mt-1" id="select-region">
+          <option value="nuea">เหนือ</option>
+          <option value="klang">กลาง</option>
+          <option value="esan">อีสาน</option>
+          <option value="tai">ใต้</option>
+        </select>
+      </label>
     </div>
-    <label class="block text-left appearance-none outline-none text-gray-800" style="max-width: 400px">
-      <span class="text-gray-700">มาจากภาคไหนเอ่ย ( แบ่งแบบสี่ภูมิภาค ref : <a target="_" class="text-blue-500" href="https://th.wikipedia.org/wiki/%E0%B8%A0%E0%B8%B9%E0%B8%A1%E0%B8%B4%E0%B8%A0%E0%B8%B2%E0%B8%84%E0%B8%82%E0%B8%AD%E0%B8%87%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B9%80%E0%B8%97%E0%B8%A8%E0%B9%84%E0%B8%97%E0%B8%A2">Click</a> )</span>
-      <select class="form-select block w-full mt-1" id="select-region">
-        <option value="nuea">เหนือ</option>
-        <option value="klang">กลาง</option>
-        <option value="esan">อีสาน</option>
-        <option value="tai">ใต้</option>
-      </select>
-    </label>
     <span class="text-red-600" style="display: none" id="is-hacker">Hacker!</span>
 
     <script src="./js/script.js"></script>

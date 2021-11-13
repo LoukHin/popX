@@ -20,13 +20,12 @@ $regions = array("nuea", "klang", "esan", "tai");
 if (isset($data->region) && isset($data->add)) {
     $region = $data->region;
     $add = $data->add;
-    if (in_array($region, $regions) && $add >= 0 && $add <= 100) {
-        $sql = $conn->prepare("UPDATE `popcat` SET `?` = `?` + ? WHERE `popcat`.id = 1");
-        $sql->bind_param("ssi", $region, $region, $add);
-        $sql->execute();
+    if (in_array($region, $regions) && $add >= 0 && $add < 100) {
+        $sql = "UPDATE `popcat` SET `$region` = `$region` + $add WHERE `popcat`.id = 1";
+        $conn->query($sql);
         $conn->close();
     } else {
-        echo -1;
+        echo 0;
     }
 } else {
     echo 0;
