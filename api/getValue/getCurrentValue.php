@@ -5,7 +5,7 @@ require './../conn.php';
 // set php runtime to unlimited
 set_time_limit(0);
 
-$sql = "SELECT * FROM popcat WHERE popcat = 1";
+$sql = "SELECT * FROM popcat WHERE popcat.id = 1";
 
 // main loop
 while (true) {
