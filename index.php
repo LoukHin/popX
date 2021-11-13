@@ -1,7 +1,6 @@
 <?php
 session_start();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,51 +8,192 @@ session_start();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>POPCAT</title>
-    <link rel="shortcut icon" type="image/jpg" href="favicon.ico" />
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" integrity="sha512-Cv93isQdFwaKBV+Z4X8kaVBYWHST58Xb/jVOcV9aRsGSArZsgAnFIhMpDoMDcFNoUtday1hdjn0nGp3+KZyyFw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <title>popX | InspiredIT</title>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
-    <script src="./js/script.js" defer></script>
+    <script src="https://unpkg.com/tailwindcss-jit-cdn"></script>
     <style>
-        .topright {
+        @import url('https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sriracha&display=swap');
+        @import url('https://fonts.googleapis.com/css?family=Raleway:900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Sriracha', cursive !important;
+            color: #007aff;
+            font-weight: 800;
+        }
+
+        #container {
+            /* Center the text in the viewport. */
+            /* position: absolute; */
+            /* margin: auto; */
+            width: 100vw;
+            height: 80pt;
+            /* top: 0;
+            bottom: 0; */
+
+            /* This filter is a lot of the magic, try commenting it out to see how the morphing works! */
+            filter: url(#threshold) blur(0.6px);
+        }
+
+        /* Your average text styling */
+        #text1,
+        #text2 {
             position: absolute;
-            top: 8px;
-            right: 16px;
-            font-size: 18px;
+            width: 100%;
+            display: inline-block;
+
+            font-family: 'Raleway', sans-serif;
+            font-size: 80pt;
+
+            text-align: center;
+
+            user-select: none;
         }
     </style>
 </head>
 
-<body>
-    <div class="container">
-        <h1>popX</h1>
-        <br><br>
-        <p id="score">0</p>
-        </br></br>
-        <!-- <img src="maincat1.png" alt="Invalid" id="popcat1" height="500x"> -->
-        <img src="./assets/image/maincat1.png" alt="Invalid" id="popcat1" height="600px">
-        <div class="badge bg-primary text-wrap topright">
-            เหนือ: <a id="demo_1">0</a><br><br>
-            กลาง: <a id="demo_2">0</a><br><br>
-            อีสาน: <a id="demo_3">0</a><br><br>
-            ใต้: <a id="demo_4">0</a><br><br>
+<body class="h-screen relative flex items-center flex-col">
+    <div class="container mx-auto px-5 mb-24 space-y-1 flex justify-center items-center flex-col">
+        <!-- <div class="text-7xl p-10">popX</div> -->
+        <div id="container">
+            <span id="text1"></span>
+            <span id="text2"></span>
         </div>
-        <select name="majar" id="majar">
-            <option value="0">[0] เหนือ</option> <!-- value 0 -->
-            <option value="1">[1] กลาง</option> <!-- value 1 -->
-            <option value="2">[2] อีสาน</option> <!-- value 3 -->
-            <option value="3">[3] ใต้</option> <!-- value 3 -->
-            <!-- <option value="political">political</option> value 4 -->
+
+        <!-- The SVG filter used to create the merging effect -->
+        <svg id="filters">
+            <defs>
+                <filter id="threshold">
+                    <!-- Basically just a threshold effect - pixels with a high enough opacity are set to full opacity, and all other pixels are set to completely transparent. -->
+                    <feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 0
+									0 1 0 0 0
+									0 0 1 0 0
+									0 0 0 255 -140" />
+                </filter>
+            </defs>
+        </svg>
+        <p id="score">0</p>
+    </div>
+    <div class="absolute w-36 h-52 p-6 mx-auto right-28 top-10 space-y-5 bg-gray-100 rounded-lg shadow-lg" id="scoreboard">
+        <h2>เหนือ : <a id="demo_1">0</a></h2>
+        <h2>กลาง : <a id="demo_2">0</a></h2>
+        <h2>อีสาน : <a id="demo_3">0</a></h2>
+        <h2>ใต้ : <a id="demo_4">0</a></h2>
+    </div>
+    <div class="mb-24" id="cat">
+        <img class="cursor-pointer" src="assets/icon/cat0.svg" alt="cat" id="imgClickAndChange">
+    </div>
+    <label class="block text-left appearance-none outline-none text-gray-800" style="max-width: 400px">
+        <span class="text-gray-700">มาจากภาคไหนเอ่ย ( แบ่งแบบสี่ภูมิภาค ref : <a target="_" class="text-blue-500" href="https://th.wikipedia.org/wiki/%E0%B8%A0%E0%B8%B9%E0%B8%A1%E0%B8%B4%E0%B8%A0%E0%B8%B2%E0%B8%84%E0%B8%82%E0%B8%AD%E0%B8%87%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B9%80%E0%B8%97%E0%B8%A8%E0%B9%84%E0%B8%97%E0%B8%A2">Click</a> )</span>
+        <select class="form-select block w-full mt-1" id="select-region">
+            <option value="nuea">เหนือ</option>
+            <option value="klang">กลาง</option>
+            <option value="esan">อีสาน</option>
+            <option value="tai">ใต้</option>
         </select>
-        <!-- Option 1: Bootstrap Bundle with Popper -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-        <!-- Option 2: Separate Popper and Bootstrap JS -->
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    </label>
+    <span class="text-red-600" style="display: none" id="is-hacker">Hacker!</span>
+    
+    <script src="./js/script.js"></script>
+    <script>
+
+        const elts = {
+            text1: document.getElementById("text1"),
+            text2: document.getElementById("text2")
+        };
+
+        // The strings to morph between. You can change these to anything you want!
+        const texts = [
+            "Inspired IT65",
+            "By",
+            "ITx",
+            "KMITL",
+            "Opening",
+            "Click",
+            "more!"
+        ];
+
+        // Controls the speed of morphing.
+        const morphTime = 1;
+        const cooldownTime = 1;
+
+        let textIndex = texts.length - 1;
+        let time = new Date();
+        let morph = 0;
+        let cooldown = cooldownTime;
+
+        elts.text1.textContent = texts[textIndex % texts.length];
+        elts.text2.textContent = texts[(textIndex + 1) % texts.length];
+
+        function doMorph() {
+            morph -= cooldown;
+            cooldown = 0;
+
+            let fraction = morph / morphTime;
+
+            if (fraction > 1) {
+                cooldown = cooldownTime;
+                fraction = 1;
+            }
+
+            setMorph(fraction);
+        }
+
+        // A lot of the magic happens here, this is what applies the blur filter to the text.
+        function setMorph(fraction) {
+            // fraction = Math.cos(fraction * Math.PI) / -2 + .5;
+
+            elts.text2.style.filter = `blur(${Math.min(8 / fraction - 8, 100)}px)`;
+            elts.text2.style.opacity = `${Math.pow(fraction, 0.4) * 100}%`;
+
+            fraction = 1 - fraction;
+            elts.text1.style.filter = `blur(${Math.min(8 / fraction - 8, 100)}px)`;
+            elts.text1.style.opacity = `${Math.pow(fraction, 0.4) * 100}%`;
+
+            elts.text1.textContent = texts[textIndex % texts.length];
+            elts.text2.textContent = texts[(textIndex + 1) % texts.length];
+        }
+
+        function doCooldown() {
+            morph = 0;
+
+            elts.text2.style.filter = "";
+            elts.text2.style.opacity = "100%";
+
+            elts.text1.style.filter = "";
+            elts.text1.style.opacity = "0%";
+        }
+
+        // Animation loop, which is called every frame.
+        function animate() {
+            requestAnimationFrame(animate);
+
+            let newTime = new Date();
+            let shouldIncrementIndex = cooldown > 0;
+            let dt = (newTime - time) / 1000;
+            time = newTime;
+
+            cooldown -= dt;
+
+            if (cooldown <= 0) {
+                if (shouldIncrementIndex) {
+                    textIndex++;
+                }
+
+                doMorph();
+            } else {
+                doCooldown();
+            }
+        }
+
+        // Start the animation.
+        animate();
+    </script>
 </body>
 
 </html>
